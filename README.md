@@ -1,25 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 # hatchways-blog-api
+
+To run my hatchways blog-api:
+
+```
+bundle install
+rails s
+```
+
+To run rspec tests, run the following in a separate terminal than where rails is running the server:
+
+```
+rspec
+```
+
+Routes have been fully tested with Postman as well as rspec unit tests.

@@ -2,6 +2,8 @@ class PostsController < ApplicationController
     require 'rest-client'
 
     def show
+
+        # Protection of params with error handling
         if (["id", "reads", "likes", "popularity"].include?(params['sortBy']) == false)
 
             render json: {error: "sortBy parameter is invalid"}, status: :bad_request
@@ -12,6 +14,7 @@ class PostsController < ApplicationController
 
         elsif params["tags"]
 
+            # setting defaults for sortBy and direction
             if params['sortBy'] == nil
                 params['sortBy'] = 'id'
             end
@@ -22,7 +25,7 @@ class PostsController < ApplicationController
 
             threads = []
             responses = []
-
+            # creating threads for each tag within a request
             for index in params["tags"]
                 sortBy = params["sortBy"]
                 direction = params["direction"]
@@ -36,7 +39,7 @@ class PostsController < ApplicationController
 
             threads.each { |thread| thread.join}
             flattened = responses.flatten
-            
+            # sorting out the direction of the response
             if params['direction'] == 'desc'
                 sorted = flattened.sort_by{|obj| obj[params['sortBy']] }.reverse
             else
